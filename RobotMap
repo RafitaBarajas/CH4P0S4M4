@@ -5,6 +5,12 @@ package org.usfirst.frc.team3158.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+ 
+
+
+}
+
+ 
 public class RobotMap {
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
@@ -27,6 +33,11 @@ public class RobotMap {
 	//set "4" to invert rear right motor
 	public static int chassis_invertMotor1 = 0;
 	public static int chassis_invertMotor2 = 0;
+	
+	public static  int shooter_talon=0;
+	public static  int shooter_encoder=0;
+	public static  int shooter_trigger_talon=0;
+	public static  int joystick=0;
 	
 	public static int chassis_gyroscope = 0;
 	//you can change the value for numbers of Encoders (max. 4)
