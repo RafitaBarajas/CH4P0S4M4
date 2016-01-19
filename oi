@@ -1,0 +1,44 @@
+package org.usfirst.frc.team3158.robot;
+
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Joystick;
+
+import org.usfirst.frc.team3158.robot.commands.*;
+/**
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
+public class OI {
+	Joystick joystick=new Joystick(0);
+	Joystick xbox=new Joystick(1);
+	public OI()
+	{
+		
+		Button aButton=new JoystickButton(xbox, 1);
+		Button bButton=new JoystickButton (xbox,2);
+		Button xButton=new JoystickButton(xbox, 3);
+		Button yButton=new JoystickButton(xbox, 4);
+		Button leftButton= new JoystickButton(xbox,5);
+		Button rightButton=new JoystickButton(xbox,6);
+		aButton.whileHeld(new CameraOveride());
+		//aButton.whileHeld(new ExtendBrake());
+		//bButton.whileHeld(new RetractBrake());
+		leftButton.whileHeld(new Lift());
+		rightButton.whileHeld(new Descend());
+		xButton.whileHeld(new OpenForks());
+		yButton.whileHeld(new CloseForks());
+		
+		SmartDashboard.putData("Open Forks", new OpenForks());
+		
+		SmartDashboard.putData("Close Forks", new CloseForks());
+		SmartDashboard.putData("Descend", new Descend());
+		SmartDashboard.putData("Lift", new Lift());
+		
+	}
+	public Joystick getJoystick(){
+		return joystick; 
+	}
+}
+
