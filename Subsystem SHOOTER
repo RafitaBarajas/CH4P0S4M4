@@ -1,0 +1,54 @@
+package org.usfirst.frc.team3158.robot.subsystems;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team3158.robot.RobotMap;
+
+public class Shooter extends Subsystem {
+    
+	 CANTalon talon_main= new CANTalon(RobotMap.shooter_talon);
+	 CANTalon talon_trigger= new CANTalon(RobotMap.shooter_trigger_talon);
+	 DigitalInput input=new DigitalInput(RobotMap.shooter_encoder);
+	 double main_speed;    												//adjusts the speed of the main talon
+	 double trigger_speed;												//adjusts the speed of the trigger talon, this variable doesn't change
+	 int stop=0;														//variable to stop talons		
+
+public Shooter(){
+}
+
+public boolean IsShootable(){
+	/* function uses to determine wheter the shooter is able to shoot,
+	 * it recovers data from the encoder, potenciometer and light sensor */
+	return true;
+}
+public  void shootWithTrigger(double speed ){
+	main_speed=speed;
+	if(IsShootable()){
+	talon_trigger.set(trigger_speed);
+	talon_main.set(main_speed);
+}else{
+	turnOffShooter();
+}
+
+}
+public  void turnOffShooter(){
+	talon_main.set(stop);
+	talon_trigger.set(stop);
+}
+public  void expellBall(){
+	talon_trigger.set(-1);
+}
+protected void initDefaultCommand() {
+	
+}
+public  void shootWithoutTrigger(double speed){
+	main_speed=speed;
+	if(IsShootable()){
+		talon_main.set(main_speed);
+	
+	}else{
+		turnOffShooter();
+	}
+}
+}
