@@ -1,0 +1,151 @@
+package org.usfirst.frc.team3158.robot.subsystems;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team3158.robot.Robot;
+import org.usfirst.frc.team3158.robot.RobotMap;
+public class DriveTrain extends Subsystem {
+
+	public CANTalon frontRight, frontLeft, backRight, backLeft;
+	public RobotDrive drive;
+	public AnalogGyro g;
+	public int Motor1 = RobotMap.chassis_invertMotor1, Motor2 = RobotMap.chassis_invertMotor2;
+	public Encoder encoder1, encoder2, encoder3, encoder4;
+	public boolean encodes;
+	
+	public DriveTrain(){
+		
+		frontRight = new CANTalon (RobotMap.chassis_frontRightMotor);
+		frontLeft = new CANTalon (RobotMap.chassis_frontLeftMotor);
+		backRight = new CANTalon (RobotMap.chassis_backRightMotor);
+		backLeft = new CANTalon (RobotMap.chassis_frontLeftMotor);
+		drive = new RobotDrive(frontLeft, backLeft,
+				   frontRight, backRight);
+		g = new AnalogGyro (RobotMap.chassis_gyroscope);
+		if (RobotMap.chassis_setnumEncoder == 4){
+			encoder4 = new Encoder (RobotMap.chassis_encoder4A, RobotMap.chassis_encoder4B);
+			encoder3 = new Encoder (RobotMap.chassis_encoder3A, RobotMap.chassis_encoder3B);
+			encoder2 = new Encoder (RobotMap.chassis_encoder2A, RobotMap.chassis_encoder2B);
+			encoder2 = new Encoder (RobotMap.chassis_encoder2A, RobotMap.chassis_encoder1B);
+		}
+		else if (RobotMap.chassis_setnumEncoder == 3){
+			encoder3 = new Encoder (RobotMap.chassis_encoder3A, RobotMap.chassis_encoder3B);
+			encoder2 = new Encoder (RobotMap.chassis_encoder2A, RobotMap.chassis_encoder2B);	
+			encoder1 = new Encoder (RobotMap.chassis_encoder1A, RobotMap.chassis_encoder1B);
+		}
+		else if (RobotMap.chassis_setnumEncoder == 2){
+			encoder1 = new Encoder (RobotMap.chassis_encoder1A, RobotMap.chassis_encoder1B);
+			encoder2 = new Encoder (RobotMap.chassis_encoder2A, RobotMap.chassis_encoder2B);
+		}
+		else if (RobotMap.chassis_setnumEncoder == 1){
+			encoder1 = new Encoder (RobotMap.chassis_encoder1A, RobotMap.chassis_encoder1B);
+		}
+		if (Motor1 >= 1){
+			
+			if (Motor1 == 1){
+				kFrontLeft(true);
+			}
+			else if (Motor1 == 2){
+				kFrontRight(true);	
+			}
+			else if (Motor1 == 3){
+				kRearLeft(true);
+			}
+			else if (Motor1 == 4){
+				kReartRight(true);
+			}
+		}
+		else if (Motor2 >= 1){
+			
+			if (Motor2 == 1){
+				kFrontLeft(true);
+			}
+			else if (Motor2 == 2){
+				kFrontRight(true);	
+			}
+			else if (Motor2 == 3){
+				kRearLeft(true);
+			}
+			else if (Motor2 == 4){
+				kReartRight(true);
+			}
+		}
+	}
+	
+	public void drive(double right, double left){
+		drive.arcadeDrive(left, right);
+	}
+	
+	public void speed(Joystick joy){
+		drive(-joy.getX(), -joy.getY());
+	}
+	
+	public double getRate(){
+		return g.getRate();
+	}
+	
+	public void kFrontLeft(boolean isInverted){
+		drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, isInverted);
+	}
+	
+	public void kFrontRight(boolean isInverted){
+		drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, isInverted);
+	}
+
+	public void kRearLeft(boolean isInverted){
+		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, isInverted);
+	}
+
+	public void kReartRight(boolean isInverted){
+		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, isInverted);
+	}
+	
+	public void chassis_getEncoder1Distance(){
+		encoder1.getDistance();
+	}
+	public void chassis_getEncoder2Distance(){
+		encoder2.getDistance();
+	}
+	public void chassis_getEncoder3Distance(){
+		encoder3.getDistance();
+	}
+	public void chassis_getEncoder4Distance(){
+		encoder4.getDistance();
+	}
+	public void chassis_getEncoder1Direction(){
+		encoder1.getDirection();
+	}
+	public void chassis_getEncoder2Direction(){
+		encoder2.getDirection();
+	}
+	public void chassis_resetEncoder1(){
+		encoder1.reset();
+	}
+	public void chassis_resetEncoder2(){
+		encoder2.reset();
+	}
+	public void chassis_resetEncoder3(){
+		encoder3.reset();
+	}
+	public void chassis_resetEncoder4(){
+		encoder4.reset();
+	}
+	public void chassis_resetAllEncoders(){
+		encoder1.reset();
+		encoder2.reset();
+		encoder3.reset();
+		encoder4.reset();
+	}
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}	
+	//github
+}
