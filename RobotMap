@@ -1,37 +1,45 @@
-RobotMap
-
-
 package org.usfirst.frc.team3158.robot;
-
-import org.usfirst.frc.team3158.robot.commands.ShootWithoutTrigger;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team3158.robot.RobotMap;;
-
-
 /**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
  */
-public class OI {
-   
-    Joystick joy = new Joystick(RobotMap.joystick);
-    public OI(){
-	     Button y = new JoystickButton(joy, 4);
-	     
-	     y.whenPressed(new ShootWithoutTrigger());
-	     
-    }
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
+public class RobotMap {
+    // For example to map the left and right motors, you could define the
+    // following variables to use with your drivetrain subsystem.
+    // public static int leftMotor = 1;
+    // public static int rightMotor = 2;
     
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+    // If you are using multiple modules, make sure to define both the port
+    // number and the module. For example you with a rangefinder:
+    // public static int rangefinderPort = 1;
+    // public static int rangefinderModule = 1;
+	
+	public static int chassis_frontRightMotor = 4;
+	public static int chassis_frontLeftMotor = 3;
+	public static int chassis_backRightMotor = 1;
+	public static int chassis_backLeftMotor = 5;
+	//if one of the motor is invert you can chose one of those options (you can change two motors at the moment):
+	//set "1" to invert front left motor
+	//set "2" to invert front right motor
+	//set "3" to invert rear left motor
+	//set "4" to invert rear right motor
+	public static int chassis_invertMotor1 = 0;
+	public static int chassis_invertMotor2 = 0;
+	
+	public static int chassis_gyroscope = 0;
+	//you can change the value for numbers of Encoders (max. 4)
+	public static int chassis_setnumEncoder = 1;
+	public static int chassis_encoder1A = 0;
+	public static int chassis_encoder1B = 0;
+	
+	public static int chassis_encoder2A = 0;
+	public static int chassis_encoder2B = 0;
+	
+	public static int chassis_encoder3A = 0;
+	public static int chassis_encoder3B = 0;
+	
+	public static int chassis_encoder4A = 0;
+	public static int chassis_encoder4B = 0;
 }
